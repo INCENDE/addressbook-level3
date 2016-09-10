@@ -48,6 +48,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | hide [private contact details](#private-contact-detail) by default | to minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 `*` | user | edit a person's details | correct a mistake I made, or update a person's new details
+`*` | advanced user | use short-form commands | get what I want done faster
 
 
 ## Appendix B : Use Cases
