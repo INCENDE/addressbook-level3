@@ -75,6 +75,31 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+  
+#### Use case : Edit an existing tag
+
+**MSS**
+
+1. User requests to list tags
+2. AddressBook shows a list of tags
+3. User requests to edit a specific tag in the list
+4. AddressBook asks what the new description is
+5. User enters the new description
+6. AddressBook prompts user to confirm the change
+7. User confirms
+8. AddressBook edits the tag to match the new description <br>
+Use case ends.
+
+**Extensions**
+
+5a. The description entered is invalid
+
+> 5a1. AddressBook shows an error message <br>
+  Use case resumes at step 4
+
+7a. User does not confirm <br>
+
+> Use case ends
 
 ## Appendix C : Non Functional Requirements
 
