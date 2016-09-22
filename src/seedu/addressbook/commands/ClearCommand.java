@@ -19,4 +19,9 @@ public class ClearCommand extends Command {
         addressBook.clear();
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public Command prepare(String commandWord, String args) {
+        return this;
+    }
 }

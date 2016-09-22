@@ -27,4 +27,9 @@ public class HelpCommand extends Command {
     public CommandResult execute() {
         return new CommandResult(MESSAGE_ALL_USAGES);
     }
+
+    @Override
+    public Command prepare(String commandWord, String args) {
+        return this;
+    }
 }
