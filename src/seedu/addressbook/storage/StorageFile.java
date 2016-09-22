@@ -22,7 +22,6 @@ public class StorageFile extends Storage {
      */
 
     private final JAXBContext jaxbContext;
-    public final Path path;
 
     /**
      * @throws InvalidStorageFilePathException if the default path is invalid
@@ -108,10 +107,6 @@ public class StorageFile extends Storage {
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
-    }
-
-    public String getPath() {
-        return path.toString();
     }
 
 }
