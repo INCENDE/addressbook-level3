@@ -4,9 +4,13 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.parser.Parser;
+
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 /**
  * Adds a person to the address book.
@@ -64,6 +68,39 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the add person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    @Override
+    public Command prepare(String commandWord, String args) {
+        final Matcher matcher = Parser.PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        try {
+            return new AddCommand(
+                    matcher.group("name"),
+
+                    matcher.group("phone"),
+                    Parser.isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+
+                    matcher.group("email"),
+                    Parser.isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+
+                    matcher.group("address"),
+                    Parser.isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+
+                    Parser.getTagsFromArgs(matcher.group("tagArguments"))
+            );
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
         }
     }
 

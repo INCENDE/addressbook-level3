@@ -61,36 +61,6 @@ public class Parser {
         return prepareCommand(commandWord, arguments);
     }
 
-    /**
-     * Parses arguments in the context of the add person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareAdd(String args){
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-        try {
-            return new AddCommand(
-                    matcher.group("name"),
-
-                    matcher.group("phone"),
-                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
-
-                    matcher.group("email"),
-                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
-
-                    matcher.group("address"),
-                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
-
-                    getTagsFromArgs(matcher.group("tagArguments"))
-            );
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
     private Command prepareCommand(final String commandWord, final String arguments) {
         Command instance = Command.getType(commandWord);
         return instance.prepare(commandWord, arguments);
