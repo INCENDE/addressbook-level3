@@ -1,8 +1,12 @@
 package seedu.addressbook.commands;
 
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+import seedu.addressbook.parser.Parser;
+import seedu.addressbook.parser.Parser.ParseException;
 
 
 /**
@@ -36,6 +40,22 @@ public class DeleteCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } catch (PersonNotFoundException pnfe) {
             return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the delete person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    @Override
+    public Command prepare(String commandWord, String args) {
+        try {
+            final int targetIndex = Parser.parseArgsAsDisplayedIndex(args);
+            return new DeleteCommand(targetIndex);
+        } catch (ParseException | NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
     }
 

@@ -86,57 +86,7 @@ public class Parser {
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
         return new HashSet<>(tagStrings);
     }
-
-
-    /**
-     * Parses arguments in the context of the delete person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareDelete(String args) {
-        try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteCommand(targetIndex);
-        } catch (ParseException | NumberFormatException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the view command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareView(String args) {
-
-        try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewCommand(targetIndex);
-        } catch (ParseException | NumberFormatException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewCommand.MESSAGE_USAGE));
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the view all command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareViewAll(String args) {
-
-        try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewAllCommand(targetIndex);
-        } catch (ParseException | NumberFormatException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewAllCommand.MESSAGE_USAGE));
-        }
-    }
-
+    
     /**
      * Parses the given arguments string as a single index number.
      *
