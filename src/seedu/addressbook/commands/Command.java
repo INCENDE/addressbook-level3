@@ -65,4 +65,38 @@ public abstract class Command {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
+
+    public abstract Command prepare(String commandWord, String args);
+
+    public static Command getType(String commandWord) {
+        switch (commandWord) {
+        case AddCommand.COMMAND_WORD:
+            return new AddCommand(null);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommand(0);
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(null);
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommand(0);
+
+        case ViewAllCommand.COMMAND_WORD:
+            return new ViewAllCommand(0);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD: // Fallthrough
+        default:
+            return new HelpCommand();
+        }
+    }
 }
