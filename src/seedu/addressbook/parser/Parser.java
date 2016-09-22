@@ -99,7 +99,7 @@ public class Parser {
     /**
      * Checks whether the private prefix of a contact detail in the add command's arguments string is present.
      */
-    private static boolean isPrivatePrefixPresent(String matchedPrefix) {
+    public static boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
     }
 
@@ -107,7 +107,7 @@ public class Parser {
      * Extracts the new person's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
      */
-    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
+    public static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
         // no tags
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
@@ -175,7 +175,7 @@ public class Parser {
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
+    public static int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
         final Matcher matcher = PERSON_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException("Could not find index number to parse");
